@@ -2,7 +2,7 @@ Recycling Management System 🌍♻️
 
 Overview
 
-   The Recycling Management System is a command-line application designed to manage and track different types of recyclable materials, calculate their environmental impact, and generate reports. The system utilizes Object-Oriented Programming (OOP) principles such as inheritance, polymorphism, encapsulation, and abstraction for a structured and scalable approach to managing recycling data.
+The Recycling Management System is a command-line application designed to manage and track different types of recyclable materials, calculate their environmental impact, and generate reports. The system utilizes Object-Oriented Programming (OOP) principles such as inheritance, polymorphism, encapsulation, and abstraction for a structured and scalable approach to managing recycling data.
 
 Features
 
