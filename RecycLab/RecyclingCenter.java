@@ -1,91 +1,59 @@
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclingCenter {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/recycling_db";
-    private static final String DB_USER = "root";  // Your DB username
-    private static final String DB_PASSWORD = "password";  // Your DB password
+    private List<RecyclingMaterial> materials = new ArrayList<>();
 
-    // Add a material to the database
+    // Add a material to the list
     public void addMaterial(RecyclingMaterial material) {
-        String sql = "INSERT INTO materials (materialType, weight, impactFactor) VALUES (?, ?, ?)";
+        materials.add(material);
+    }
 
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, material.getMaterialType());
-            stmt.setDouble(2, material.getWeight());
-            stmt.setDouble(3, ((CustomMaterial) material).calculateEnvironmentalImpact() / material.getWeight());
-            stmt.executeUpdate();
-            System.out.println("Material added successfully.");
-        } catch (SQLException e) {
-            e.printStackTrace();
+    // Remove a material by index
+    public void removeMaterial(int index) {
+        if (index >= 0 && index < materials.size()) {
+            materials.remove(index);
+        } else {
+            System.out.println("Invalid index, unable to remove material.");
         }
     }
 
-    // Remove a material by ID from the database
-    public void removeMaterial(int id) {
-        String sql = "DELETE FROM materials WHERE id = ?";
-
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            int rowsAffected = stmt.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Material removed successfully.");
-            } else {
-                System.out.println("No material found with that ID.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    // Edit a material's details by index
+    public void editMaterial(int index, String newMaterialType, double newWeight) {
+        if (index >= 0 && index < materials.size()) {
+            RecyclingMaterial material = materials.get(index);
+            material.setMaterialType(newMaterialType);
+            material.setWeight(newWeight);
+        } else {
+            System.out.println("Invalid index, unable to edit material.");
         }
     }
 
-    // Edit a material in the database
-    public void editMaterial(int id, String newMaterialType, double newWeight, double newImpactFactor) {
-        String sql = "UPDATE materials SET materialType = ?, weight = ?, impactFactor = ? WHERE id = ?";
-
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, newMaterialType);
-            stmt.setDouble(2, newWeight);
-            stmt.setDouble(3, newImpactFactor);
-            stmt.setInt(4, id);
-            int rowsAffected = stmt.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Material updated successfully.");
-            } else {
-                System.out.println("No material found with that ID.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    // Generate impact report
+    public void generateImpactReport() {
+        if (materials.isEmpty()) {
+            System.out.println("No materials to report on.");
+            return;
         }
+
+        double totalImpact = 0;
+        for (RecyclingMaterial material : materials) {
+            material.displayMaterialInfo();
+            double impact = material.calculateEnvironmentalImpact();
+            System.out.println("Environmental Impact: " + impact + " kg CO2");
+            totalImpact += impact;
+        }
+        System.out.println("\nTotal Environmental Impact: " + totalImpact + " kg CO2");
     }
 
-    // List all materials from the database
+    // List all materials
     public void listMaterials() {
-        String sql = "SELECT * FROM materials";
-
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            boolean hasMaterials = false;
-            while (rs.next()) {
-                hasMaterials = true;
-                int id = rs.getInt("id");
-                String materialType = rs.getString("materialType");
-                double weight = rs.getDouble("weight");
-                double impactFactor = rs.getDouble("impactFactor");
-                System.out.println(id + ". " + materialType + " (" + weight + " kg), Impact Factor: " + impactFactor);
-            }
-
-            if (!hasMaterials) {
-                System.out.println("No materials in the system.");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (materials.isEmpty()) {
+            System.out.println("No materials in the system.");
+            return;
+        }
+        for (int i = 0; i < materials.size(); i++) {
+            System.out.println(i + ". " + materials.get(i).getMaterialType() + " (" + materials.get(i).getWeight() + " kg)");
         }
     }
 }

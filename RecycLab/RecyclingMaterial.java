@@ -1,4 +1,5 @@
-// Abstract Class for Recycling Material
+import java.util.List;
+
 public abstract class RecyclingMaterial {
     private String materialType;
     private double weight;

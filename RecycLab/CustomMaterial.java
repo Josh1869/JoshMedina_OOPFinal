@@ -1,4 +1,3 @@
-// Subclass for custom recycling material (with dynamic impact factor)
 public class CustomMaterial extends RecyclingMaterial {
     private double impactFactor;
 
