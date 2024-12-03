@@ -80,3 +80,49 @@ showMenu(): Displays the main menu with options for adding, removing, and editin
 addMaterial(): Prompts the user to input details of a new material and adds it to the system.
 removeMaterial(): Prompts the user to remove a material from the system.
 editMaterial(): Prompts the user to edit the details of an existing material.
+
+How to Run 🚀
+
+Prerequisites
+
+Make sure you have Java 8 or higher installed on your machine. You can download it from the official Java website.
+
+Steps to Run:
+
+Clone the Repository (if using Git):
+
+bash
+
+git clone https://github.com/yourusername/RecyclingManagementSystem.git
+cd RecyclingManagementSystem
+Compile the Code:
+
+Open a terminal/command prompt.
+Navigate to the directory where the Java files are stored.
+Compile the code using the following command:
+
+bash
+
+javac RecyclingMaterial.java CustomMaterial.java RecyclingCenter.java RecyclingManagementSystem.java
+
+Run the Program:
+
+After compiling, run the program using:
+bash
+
+java RecyclingManagementSystem
+Interact with the System:
+
+The program will present you with a text-based menu to add, remove, or edit materials and generate reports.
+Follow the prompts to manage your materials and track their environmental impact.
+
+Contributing 🤝
+If you'd like to contribute to this project, feel free to fork the repository, make your changes, and submit a pull request. Contributions, bug fixes, and feature suggestions are always welcome!
+
+License 📄
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+Conclusion 🌱
+The Recycling Management System demonstrates how Object-Oriented Programming principles can be applied to a real-world problem—tracking recyclable materials and calculating their environmental impact. This approach ensures that the system is scalable, maintainable, and easy to extend with additional functionality in the future.
+
+Let's work together to create a more sustainable environment! 🌎
