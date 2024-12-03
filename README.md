@@ -93,7 +93,7 @@ Clone the Repository (if using Git):
 
 bash
 
-git clone https://github.com/yourusername/RecyclingManagementSystem.git
+git clone https://github.com/Josh1869/RecyclingManagementSystem.git
 cd RecyclingManagementSystem
 Compile the Code:
 
